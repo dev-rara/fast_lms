@@ -24,4 +24,12 @@ public class Member {
 
     // DB 내부적으로 저장하는 회원등록일
     private LocalDateTime regDt;
+
+    //메일 인증 완료 여부확인
+    private boolean emailAuthYn;
+
+    //회원가입 시 메일 인증키 확인
+    private String emailAuthKey;
+
+
 }
