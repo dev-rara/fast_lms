@@ -1,10 +1,10 @@
-package com.example.lms_service;
+package com.example.lms;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LmsServiceApplicationTests {
+class LmsApplicationTests {
 
     @Test
     void contextLoads() {

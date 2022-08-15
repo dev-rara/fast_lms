@@ -1,4 +1,4 @@
-package com.example.lms_service.configuration;
+package com.example.lms.configuration;
 
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;

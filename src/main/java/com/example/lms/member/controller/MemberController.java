@@ -1,7 +1,7 @@
-package com.example.lms_service.member.controller;
+package com.example.lms.member.controller;
 
-import com.example.lms_service.member.model.MemberInput;
-import com.example.lms_service.member.service.MemberService;
+import com.example.lms.member.model.MemberInput;
+import com.example.lms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,4 +57,6 @@ public class MemberController {
 
         return "member/info";
     }
+
+
 }

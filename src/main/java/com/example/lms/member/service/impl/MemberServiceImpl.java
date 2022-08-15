@@ -1,11 +1,11 @@
-package com.example.lms_service.member.service.impl;
+package com.example.lms.member.service.impl;
 
-import com.example.lms_service.component.MailComponents;
-import com.example.lms_service.exception.MemberNotEmailAuthException;
-import com.example.lms_service.member.entity.Member;
-import com.example.lms_service.member.model.MemberInput;
-import com.example.lms_service.member.repository.MemberRepository;
-import com.example.lms_service.member.service.MemberService;
+import com.example.lms.components.MailComponents;
+import com.example.lms.exception.MemberNotEmailAuthException;
+import com.example.lms.member.entity.Member;
+import com.example.lms.member.model.MemberInput;
+import com.example.lms.member.repository.MemberRepository;
+import com.example.lms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

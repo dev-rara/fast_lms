@@ -1,4 +1,4 @@
-package com.example.lms_service.component;
+package com.example.lms.components;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;

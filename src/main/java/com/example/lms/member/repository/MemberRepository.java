@@ -1,6 +1,6 @@
-package com.example.lms_service.member.repository;
+package com.example.lms.member.repository;
 
-import com.example.lms_service.member.entity.Member;
+import com.example.lms.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

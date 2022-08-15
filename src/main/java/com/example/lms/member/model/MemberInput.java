@@ -1,4 +1,4 @@
-package com.example.lms_service.member.model;
+package com.example.lms.member.model;
 
 import lombok.*;
 

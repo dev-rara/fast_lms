@@ -1,13 +1,13 @@
-package com.example.lms_service;
+package com.example.lms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LmsServiceApplication {
+public class LmsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LmsServiceApplication.class, args);
+        SpringApplication.run(LmsApplication.class, args);
     }
 
 }
