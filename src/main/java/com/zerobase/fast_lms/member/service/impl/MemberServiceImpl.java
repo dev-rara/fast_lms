@@ -1,14 +1,23 @@
 package com.zerobase.fast_lms.member.service.impl;
 
 import com.zerobase.fast_lms.component.MailComponents;
+import com.zerobase.fast_lms.exception.MemberNotEmailAuthException;
 import com.zerobase.fast_lms.member.entity.Member;
 import com.zerobase.fast_lms.member.model.MemberInput;
 import com.zerobase.fast_lms.member.repository.MemberRepository;
 import com.zerobase.fast_lms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,27 +30,29 @@ public class MemberServiceImpl implements MemberService {
 
     /**
      * 회원 가입
-     * 이미 존재하고 있는 아이디는 아닌지 확인필요
      */
     @Override
     public boolean register(MemberInput parameter) {
 
         Optional<Member> optionalMember = memberRepository.findById(parameter.getUserId());
-        if(optionalMember.isPresent()) {    //userId에 해당하는 데이터가 이미 존재하는 경우
+        if(optionalMember.isPresent()) {
             return false;
         }
 
+        String encPassword = BCrypt.hashpw(parameter.getPassword(), BCrypt.gensalt());
         String uuid = UUID.randomUUID().toString();
 
         Member member = Member.builder()
                 .userId(parameter.getUserId())
                 .userName(parameter.getUserName())
                 .phone(parameter.getPhone())
-                .password(parameter.getPassword())
+                .password(encPassword)
                 .regDt(LocalDateTime.now())
                 .emailAuthYn(false)
                 .emailAuthKey(uuid)
                 .build();
+
+        memberRepository.save(member);
 
 
         String email = parameter.getUserId();
@@ -54,6 +65,7 @@ public class MemberServiceImpl implements MemberService {
 
         return true;
     }
+
 
     @Override
     public boolean emailAuth(String uuid) {
@@ -69,5 +81,23 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
 
         return true;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        Optional<Member> optionalMember = memberRepository.findById(username);
+        if(!optionalMember.isPresent()) {
+            throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
+        }
+        Member member = optionalMember.get();
+        if (!member.isEmailAuthYn()) {
+            throw new MemberNotEmailAuthException("이메일 활성화 이후에 로그인 해주세요.");
+        }
+
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        return new User(member.getUserId(), member.getPassword(), grantedAuthorities);
     }
 }

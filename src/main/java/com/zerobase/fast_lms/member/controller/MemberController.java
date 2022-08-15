@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,11 +17,16 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    // 회원가입 화면
     @GetMapping("/member/register")
     public String register() {
 
         return "member/register";
+    }
+
+    @RequestMapping("/member/login")
+    public String login() {
+
+        return "member/login";
     }
 
     // 회원가입 정보 입력 후 서버에 전송
@@ -44,5 +50,11 @@ public class MemberController {
         model.addAttribute("result", result);
 
         return "member/email-auth";
+    }
+
+    @GetMapping("/member/info")
+    public String memberInfo() {
+
+        return "member/info";
     }
 }
