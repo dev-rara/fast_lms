@@ -1,4 +1,4 @@
-package com.example.fast_lms;
+package com.example.lms_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

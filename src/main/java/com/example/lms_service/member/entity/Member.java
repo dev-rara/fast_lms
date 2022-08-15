@@ -1,4 +1,4 @@
-package com.example.fast_lms.member.entity;
+package com.example.lms_service.member.entity;
 
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package com.example.fast_lms;
+package com.example.lms_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

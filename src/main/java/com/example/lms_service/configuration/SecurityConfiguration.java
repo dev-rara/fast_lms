@@ -1,6 +1,6 @@
-package com.example.fast_lms.configuration;
+package com.example.lms_service.configuration;
 
-import com.example.fast_lms.member.service.MemberService;
+import com.example.lms_service.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

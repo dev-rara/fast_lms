@@ -1,6 +1,6 @@
-package com.example.fast_lms.configuration;
+package com.example.lms_service.configuration;
 
-import com.example.fast_lms.FastLmsApplication;
+import com.example.lms_service.FastLmsApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 

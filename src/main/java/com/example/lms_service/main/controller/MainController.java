@@ -1,4 +1,4 @@
-package com.example.fast_lms.main.controller;
+package com.example.lms_service.main.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
