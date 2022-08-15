@@ -1,6 +1,6 @@
-package com.zerobase.fast_lms.member.repository;
+package com.example.fast_lms.member.repository;
 
-import com.zerobase.fast_lms.member.entity.Member;
+import com.example.fast_lms.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

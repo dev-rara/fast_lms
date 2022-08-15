@@ -1,11 +1,11 @@
-package com.zerobase.fast_lms.member.service.impl;
+package com.example.fast_lms.member.service.impl;
 
-import com.zerobase.fast_lms.component.MailComponents;
-import com.zerobase.fast_lms.exception.MemberNotEmailAuthException;
-import com.zerobase.fast_lms.member.entity.Member;
-import com.zerobase.fast_lms.member.model.MemberInput;
-import com.zerobase.fast_lms.member.repository.MemberRepository;
-import com.zerobase.fast_lms.member.service.MemberService;
+import com.example.fast_lms.component.MailComponents;
+import com.example.fast_lms.exception.MemberNotEmailAuthException;
+import com.example.fast_lms.member.entity.Member;
+import com.example.fast_lms.member.model.MemberInput;
+import com.example.fast_lms.member.repository.MemberRepository;
+import com.example.fast_lms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

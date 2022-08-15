@@ -1,7 +1,7 @@
-package com.zerobase.fast_lms.member.controller;
+package com.example.fast_lms.member.controller;
 
-import com.zerobase.fast_lms.member.model.MemberInput;
-import com.zerobase.fast_lms.member.service.MemberService;
+import com.example.fast_lms.member.model.MemberInput;
+import com.example.fast_lms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

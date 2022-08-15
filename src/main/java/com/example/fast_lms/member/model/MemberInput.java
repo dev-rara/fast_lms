@@ -1,4 +1,4 @@
-package com.zerobase.fast_lms.member.model;
+package com.example.fast_lms.member.model;
 
 import lombok.*;
 

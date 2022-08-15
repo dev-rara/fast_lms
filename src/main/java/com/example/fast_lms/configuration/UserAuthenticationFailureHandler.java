@@ -1,4 +1,4 @@
-package com.zerobase.fast_lms.configuration;
+package com.example.fast_lms.configuration;
 
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;

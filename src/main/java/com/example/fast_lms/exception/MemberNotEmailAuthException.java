@@ -1,4 +1,4 @@
-package com.zerobase.fast_lms.exception;
+package com.example.fast_lms.exception;
 
 public class MemberNotEmailAuthException extends RuntimeException {
     public MemberNotEmailAuthException(String error) {

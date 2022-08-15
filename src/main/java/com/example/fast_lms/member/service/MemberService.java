@@ -1,6 +1,6 @@
-package com.zerobase.fast_lms.member.service;
+package com.example.fast_lms.member.service;
 
-import com.zerobase.fast_lms.member.model.MemberInput;
+import com.example.fast_lms.member.model.MemberInput;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface MemberService extends UserDetailsService {

@@ -1,4 +1,4 @@
-package com.zerobase.fast_lms;
+package com.example.fast_lms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

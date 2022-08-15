@@ -1,6 +1,5 @@
-package com.zerobase.fast_lms.main.controller;
+package com.example.fast_lms.main.controller;
 
-import com.zerobase.fast_lms.component.MailComponents;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

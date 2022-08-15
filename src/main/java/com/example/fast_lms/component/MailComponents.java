@@ -1,4 +1,4 @@
-package com.zerobase.fast_lms.component;
+package com.example.fast_lms.component;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
