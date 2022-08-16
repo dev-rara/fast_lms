@@ -1,12 +1,16 @@
 package com.example.lms.admin.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.example.lms.member.entity.Member;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
 public class MemberDto {
 
     String userId;
@@ -27,4 +31,19 @@ public class MemberDto {
     //컬럼 추가
     long totalCount;
     long seq;
+
+    public static MemberDto of(Member member) {
+        return  MemberDto.builder()
+                .userId(member.getUserId())
+                .userName(member.getUserName())
+                .phone(member.getPhone())
+                .regDt(member.getRegDt())
+                .emailAuthYn(member.isEmailAuthYn())
+                .emailAuthDt(member.getEmailAuthDt())
+                .emailAuthKey(member.getEmailAuthKey())
+                .resetPasswordKey(member.getResetPasswordKey())
+                .resetPasswordLimitDt(member.getResetPasswordLimitDt())
+                .adminYn(member.isAdminYn())
+                .build();
+    }
 }

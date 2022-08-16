@@ -8,12 +8,12 @@
         <version>2.7.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.zerobase</groupId>
-    <artifactId>fast_lms</artifactId>
+    <groupId>com.example</groupId>
+    <artifactId>lms</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>fast_lms</name>
-    <description>fast_lms</description>
+    <name>lms</name>
+    <description>lms</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

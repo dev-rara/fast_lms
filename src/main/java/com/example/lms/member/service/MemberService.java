@@ -42,4 +42,9 @@ public interface MemberService extends UserDetailsService {
      * 회원 목록 가져오기(관리자만 사용가능)
      */
     List<MemberDto> list(MemberParam parameter);
+
+    /**
+     * 회원 상세 정보
+     */
+    MemberDto detail(String userId);
 }
