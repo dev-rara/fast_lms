@@ -36,4 +36,7 @@ public class Member {
     private String resetPasswordKey;
 
     private LocalDateTime resetPasswordLimitDt;
+
+    //관리자 여부 확인
+    private boolean adminYn;
 }
