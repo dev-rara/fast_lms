@@ -4,6 +4,7 @@ import com.example.lms.components.MailComponents;
 import com.example.lms.exception.MemberNotEmailAuthException;
 import com.example.lms.member.entity.Member;
 import com.example.lms.member.model.MemberInput;
+import com.example.lms.member.model.ResetPasswordInput;
 import com.example.lms.member.repository.MemberRepository;
 import com.example.lms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -84,12 +85,89 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public boolean sendResetPassword(ResetPasswordInput parameter) {
+
+        Optional<Member> optionalMember = memberRepository.findByUserIdAndUserName(
+                parameter.getUserId(), parameter.getUserName());
+
+        if(!optionalMember.isPresent()) {
+            throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
+        }
+        Member member = optionalMember.get();
+
+        String uuid = UUID.randomUUID().toString();
+
+        member.setResetPasswordKey(uuid);
+        member.setResetPasswordLimitDt(LocalDateTime.now().plusDays(1));
+        memberRepository.save(member);
+
+        String email = parameter.getUserId();
+        String subject = "[lms service] 비밀번호 초기화 안내입니다. ";
+        String text = "<p>비밀번호 초기화를 요청하셔서 안내 드립니다.</p>"
+                + "<p>아래 링크를 통해 비밀번호 초기화를 완료 해주세요.</p>"
+                + "<div><a target='_blank' href='http://localhost:8080/member/reset/password?id="
+                + uuid + "'> 비밀번호 초기화 </a></div>";
+        mailComponents.sendMail(email, subject, text);
+
+        return true;
+    }
+
+    @Override
+    public boolean resetPassword(String uuid, String password) {
+        Optional<Member> optionalMember = memberRepository.findByResetPasswordKey(uuid);
+        if(!optionalMember.isPresent()) {
+            throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
+        }
+
+        Member member = optionalMember.get();
+
+        //초기화 유효기간 확인
+        if(member.getResetPasswordLimitDt() == null) {
+            throw new RuntimeException("해당 링크의 유효기간이 완료되었습니다.");
+        }
+
+        if(member.getResetPasswordLimitDt().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("해당 링크의 유효기간이 완료되었습니다.");
+        }
+
+        String encPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        member.setPassword(encPassword);
+        member.setResetPasswordKey("");
+        member.setResetPasswordLimitDt(null);
+        memberRepository.save(member);
+
+        return true;
+    }
+
+    @Override
+    public boolean checkResetPassword(String uuid) {
+        Optional<Member> optionalMember = memberRepository.findByResetPasswordKey(uuid);
+        if(!optionalMember.isPresent()) {
+            return false;
+        }
+
+        Member member = optionalMember.get();
+
+        //초기화 유효기간 확인
+        if(member.getResetPasswordLimitDt() == null) {
+            throw new RuntimeException("해당 링크의 유효기간이 완료되었습니다.");
+        }
+
+        if(member.getResetPasswordLimitDt().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("해당 링크의 유효기간이 완료되었습니다.");
+        }
+
+        return true;
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Optional<Member> optionalMember = memberRepository.findById(username);
         if(!optionalMember.isPresent()) {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
         }
+
         Member member = optionalMember.get();
         if (!member.isEmailAuthYn()) {
             throw new MemberNotEmailAuthException("이메일 활성화 이후에 로그인 해주세요.");

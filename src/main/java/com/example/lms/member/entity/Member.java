@@ -31,4 +31,9 @@ public class Member {
 
     //회원가입 시 메일 인증키 확인
     private String emailAuthKey;
+
+    //비밀번호 초기화 시 확인용
+    private String resetPasswordKey;
+
+    private LocalDateTime resetPasswordLimitDt;
 }

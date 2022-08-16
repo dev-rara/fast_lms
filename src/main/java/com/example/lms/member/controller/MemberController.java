@@ -1,6 +1,7 @@
 package com.example.lms.member.controller;
 
 import com.example.lms.member.model.MemberInput;
+import com.example.lms.member.model.ResetPasswordInput;
 import com.example.lms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,24 @@ public class MemberController {
         return "member/login";
     }
 
-    // 회원가입 정보 입력 후 서버에 전송
+    @GetMapping("/member/find/password")
+    public String findPassword() {
+        return "/member/find_password";
+    }
+
+    @PostMapping("/member/find/password")
+    public String findPasswordSubmit(Model model, ResetPasswordInput parameter) {
+        boolean result = false;
+        try {
+            result = memberService.sendResetPassword(parameter);
+        } catch(Exception e)  {
+        }
+        model.addAttribute("result", result);
+
+        return "member/find_password_result";
+    }
+
+
     @PostMapping("member/register")
     public String registerSubmit(Model model, HttpServletRequest request, MemberInput parameter) {
 
@@ -49,7 +67,7 @@ public class MemberController {
         boolean result = memberService.emailAuth(uuid);
         model.addAttribute("result", result);
 
-        return "member/email-auth";
+        return "member/email_auth";
     }
 
     @GetMapping("/member/info")
@@ -58,5 +76,29 @@ public class MemberController {
         return "member/info";
     }
 
+    @GetMapping("/member/reset/password")
+    public String resetPassword(Model model, HttpServletRequest request) {
 
+        String uuid = request.getParameter("id");
+
+        boolean result = memberService.checkResetPassword(uuid);
+
+        model.addAttribute("result", result);
+
+        return "member/reset_password";
+    }
+
+    @PostMapping("/member/reset/password")
+    public String resetPasswordSubmit(Model model, ResetPasswordInput parameter) {
+        boolean result = false;
+
+        try {
+            result = memberService.resetPassword(parameter.getId(), parameter.getPassword());
+        } catch(Exception e) {
+        }
+
+        model.addAttribute("result", result);
+
+        return "member/reset_password_result";
+    }
 }
