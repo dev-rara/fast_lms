@@ -1,6 +1,7 @@
 package com.example.lms.member.service;
 
 import com.example.lms.admin.dto.MemberDto;
+import com.example.lms.admin.model.MemberParam;
 import com.example.lms.member.entity.Member;
 import com.example.lms.member.model.MemberInput;
 import com.example.lms.member.model.ResetPasswordInput;
@@ -40,5 +41,5 @@ public interface MemberService extends UserDetailsService {
     /**
      * 회원 목록 가져오기(관리자만 사용가능)
      */
-    List<MemberDto> list();
+    List<MemberDto> list(MemberParam parameter);
 }

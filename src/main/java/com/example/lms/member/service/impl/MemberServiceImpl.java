@@ -2,6 +2,7 @@ package com.example.lms.member.service.impl;
 
 import com.example.lms.admin.dto.MemberDto;
 import com.example.lms.admin.mapper.MemberMapper;
+import com.example.lms.admin.model.MemberParam;
 import com.example.lms.components.MailComponents;
 import com.example.lms.exception.MemberNotEmailAuthException;
 import com.example.lms.member.entity.Member;
@@ -170,13 +171,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<MemberDto> list() {
-        MemberDto parameter = new MemberDto();
+    public List<MemberDto> list(MemberParam parameter) {
 
         List<MemberDto> list = memberMapper.selectList(parameter);
 
         return list;
-//        return memberRepository.findAll();
     }
 
     @Override
