@@ -2,7 +2,6 @@ package com.example.lms.member.service;
 
 import com.example.lms.admin.dto.MemberDto;
 import com.example.lms.admin.model.MemberParam;
-import com.example.lms.member.entity.Member;
 import com.example.lms.member.model.MemberInput;
 import com.example.lms.member.model.ResetPasswordInput;
 import org.springframework.security.core.userdetails.UserDetailsService;
