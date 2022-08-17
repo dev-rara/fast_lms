@@ -1,6 +1,7 @@
 package com.example.lms.admin.controller;
 
 import com.example.lms.admin.dto.MemberDto;
+import com.example.lms.admin.model.MemberInput;
 import com.example.lms.admin.model.MemberParam;
 import com.example.lms.member.service.MemberService;
 import com.example.lms.util.PageUtil;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -45,5 +47,21 @@ public class AdminMemberController {
         model.addAttribute("member", member);
 
         return "admin/member/detail";
+    }
+
+    @PostMapping("/admin/member/status.do")
+    public String status(Model model, MemberInput parameter) {
+
+        boolean result = memberService.updateStatus(parameter.getUserId(), parameter.getUserStatus());
+
+        return "redirect:/admin/member/detail.do?userId=" + parameter.getUserId();
+    }
+
+    @PostMapping("/admin/member/password.do")
+    public String password(Model model, MemberInput parameter) {
+
+        boolean result = memberService.updatePassword(parameter.getUserId(), parameter.getPassword());
+
+        return "redirect:/admin/member/detail.do?userId=" + parameter.getUserId();
     }
 }
