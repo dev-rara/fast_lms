@@ -7,5 +7,6 @@ import lombok.Setter;
 @Setter
 public class CourseInput {
 
+    long id;
     String subject;
 }

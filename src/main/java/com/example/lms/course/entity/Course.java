@@ -15,6 +15,8 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    long categoryId;
     String imagePath;
     String keyword;
     String subject;

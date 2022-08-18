@@ -58,7 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true);
 
         http.exceptionHandling()
-                .accessDeniedPage("/error/denied");
+                .accessDeniedPage("/error.html/denied");
 
         super.configure(http);
     }

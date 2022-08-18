@@ -5,7 +5,6 @@ import com.example.lms.admin.model.MemberInput;
 import com.example.lms.admin.model.MemberParam;
 import com.example.lms.course.controller.BaseController;
 import com.example.lms.member.service.MemberService;
-import com.example.lms.util.PageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

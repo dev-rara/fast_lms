@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +37,23 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public boolean set(CourseInput parameter) {
+
+        Optional<Course> optionalCourse = courseRepository.findById(parameter.getId());
+
+        if (!optionalCourse.isPresent()) {
+            return false;
+        }
+        Course course = optionalCourse.get();
+        course.setSubject(parameter.getSubject());
+        course.setUpDt(LocalDateTime.now());
+
+        courseRepository.save(course);
+
+        return true;
+    }
+
+    @Override
     public List<CourseDto> list(CourseParam parameter) {
         long totalCount = courseMapper.selectListCount(parameter);
 
@@ -49,5 +67,11 @@ public class CourseServiceImpl implements CourseService {
             }
         }
         return list;
+    }
+
+    @Override
+    public CourseDto getById(long id) {
+
+        return courseRepository.findById(id).map(CourseDto::of).orElse(null);
     }
 }
