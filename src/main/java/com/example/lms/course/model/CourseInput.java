@@ -8,5 +8,6 @@ import lombok.Setter;
 public class CourseInput {
 
     long id;
+    long categoryId;
     String subject;
 }

@@ -27,6 +27,7 @@ public class CourseServiceImpl implements CourseService {
     public boolean add(CourseInput parameter) {
 
         Course course = Course.builder()
+                .categoryId(parameter.getCategoryId())
                 .subject(parameter.getSubject())
                 .regDt(LocalDateTime.now())
                 .build();
@@ -45,6 +46,7 @@ public class CourseServiceImpl implements CourseService {
             return false;
         }
         Course course = optionalCourse.get();
+        course.setCategoryId(parameter.getCategoryId());
         course.setSubject(parameter.getSubject());
         course.setUpDt(LocalDateTime.now());
 
