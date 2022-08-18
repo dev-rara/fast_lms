@@ -3,6 +3,7 @@ package com.example.lms.course.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,7 +29,7 @@ public class Course {
     String contents;
     long price;
     long salePrice;
-    LocalDateTime saleEndDt;
+    LocalDate saleEndDt;
 
     LocalDateTime regDt;
     LocalDateTime upDt;

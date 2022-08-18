@@ -3,6 +3,7 @@ package com.example.lms.course.dto;
 import com.example.lms.course.entity.Course;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 public class CourseDto {
 
     Long id;
+    long categoryId;
     String imagePath;
     String keyword;
     String subject;
@@ -20,7 +22,7 @@ public class CourseDto {
     String contents;
     long price;
     long salePrice;
-    LocalDateTime saleEndDt;
+    LocalDate saleEndDt;
     LocalDateTime regDt;
     LocalDateTime upDt;
 
@@ -31,6 +33,7 @@ public class CourseDto {
 
         return  CourseDto.builder()
                 .id(course.getId())
+                .categoryId(course.getCategoryId())
                 .imagePath(course.getImagePath())
                 .keyword(course.getKeyword())
                 .subject(course.getSubject())
