@@ -1,33 +1,30 @@
-package com.example.lms.course.entity;
+package com.example.lms.course.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CourseDto {
+
     Long id;
     String imagePath;
     String keyword;
     String subject;
-
-    @Column(length = 1000)
     String summary;
-
-    @Lob
     String contents;
     long price;
     long salePrice;
     LocalDateTime saleEndDt;
-
     LocalDateTime regDt;
     LocalDateTime upDt;
+
+    long totalCount;
+    long seq;
 }
