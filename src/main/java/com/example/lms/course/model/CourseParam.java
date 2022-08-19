@@ -7,5 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 public class CourseParam extends CommonParam {
+
     long id;
+    long categoryId;
 }
