@@ -1,4 +1,4 @@
-package com.example.lms.member.controller;
+package com.example.lms.course.controller;
 
 import com.example.lms.admin.dto.CategoryDto;
 import com.example.lms.admin.service.CategoryService;

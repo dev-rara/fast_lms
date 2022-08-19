@@ -3,9 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>lsm service</title>
+    <style>
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+      $(function() {
+
+          $('#submitForm').on('submit', function () {
+
+              if(!confirm('수강 신청을 하시겠습니까?')) {
+                  return false;
+              }
+
+              var $thisFrom = $(this);
+              var url = '/api/course/req.api';
+              var parameter = {
+                  courseId: $thisFrom.find('input[name=id]').val()
+              };
+
+              axios.post(url, parameter).then(function(response){
+
+                  console.log(response);
+
+              }).catch(function (err) {
+
+                  console.log(err);
+
+              });
+
+              return false;
+          });
+
+      });
+
+    </script>
 </head>
-<style>
-</style>
 <body>
 <h1>강좌 상세 정보</h1>
 <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
@@ -19,8 +52,11 @@
             <p>할인가격: <span th:text="${detail.salePrice}">0</span></p>
         </div>
         <div>
-            <button type="button">수강 신청</button>
-            <a href="/course">강좌 목록</a>
+            <form id="submitForm" method="post">
+                <input type="hidden" name="id" th:value="${detail.id}">
+                <button type="submit">수강 신청</button>
+                <a href="/course">강좌 목록</a>
+            </form>
         </div>
     </div>
 

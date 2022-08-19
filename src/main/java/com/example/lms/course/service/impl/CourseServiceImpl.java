@@ -2,10 +2,13 @@ package com.example.lms.course.service.impl;
 
 import com.example.lms.course.dto.CourseDto;
 import com.example.lms.course.entity.Course;
+import com.example.lms.course.entity.TakeCourse;
 import com.example.lms.course.mapper.CourseMapper;
 import com.example.lms.course.model.CourseInput;
 import com.example.lms.course.model.CourseParam;
+import com.example.lms.course.model.TakeCourseInput;
 import com.example.lms.course.repository.CourseRepository;
+import com.example.lms.course.repository.TakeCourseRepository;
 import com.example.lms.course.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,7 @@ import org.springframework.util.CollectionUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +26,8 @@ import java.util.Optional;
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
+    private final TakeCourseRepository takeCourseRepository;
+
     private final CourseMapper courseMapper;
 
     private LocalDate getLocalDate(String value) {
@@ -150,5 +156,35 @@ public class CourseServiceImpl implements CourseService {
             return CourseDto.of(optionalCourse.get());
         }
         return null;
+    }
+
+    @Override
+    public boolean req(TakeCourseInput parameter) {
+
+        Optional<Course> optionalCourse = courseRepository.findById(parameter.getCourseId());
+        if(!optionalCourse.isPresent()) {
+            return false;
+        }
+        Course course = optionalCourse.get();
+
+        String[] statusList = {TakeCourse.STATUS_REQ, TakeCourse.STATUS_COMPLETE};
+        long count = takeCourseRepository.countByCourseIdAndUserIdAndStatusIn(course.getId()
+        , parameter.getUserId(), Arrays.asList(statusList));
+
+        if(count > 0) {
+            return false;
+        }
+
+
+        TakeCourse takeCourse = TakeCourse.builder()
+                .courseId(course.getId())
+                .userId(parameter.getUserId())
+                .payPrice(course.getSalePrice())
+                .regDt(LocalDateTime.now())
+                .status(TakeCourse.STATUS_REQ)
+                .build();
+        takeCourseRepository.save(takeCourse);
+
+        return true;
     }
 }
