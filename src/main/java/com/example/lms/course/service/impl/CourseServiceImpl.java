@@ -6,6 +6,7 @@ import com.example.lms.course.entity.TakeCourse;
 import com.example.lms.course.mapper.CourseMapper;
 import com.example.lms.course.model.CourseInput;
 import com.example.lms.course.model.CourseParam;
+import com.example.lms.course.model.ServiceResult;
 import com.example.lms.course.model.TakeCourseInput;
 import com.example.lms.course.repository.CourseRepository;
 import com.example.lms.course.repository.TakeCourseRepository;
@@ -159,11 +160,16 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public boolean req(TakeCourseInput parameter) {
+    public ServiceResult req(TakeCourseInput parameter) {
+
+        ServiceResult result = new ServiceResult();
 
         Optional<Course> optionalCourse = courseRepository.findById(parameter.getCourseId());
         if(!optionalCourse.isPresent()) {
-            return false;
+            result.setResult(false);
+            result.setMessage("강좌 정보가 존재하지 않습니다.");
+
+            return result;
         }
         Course course = optionalCourse.get();
 
@@ -172,7 +178,10 @@ public class CourseServiceImpl implements CourseService {
         , parameter.getUserId(), Arrays.asList(statusList));
 
         if(count > 0) {
-            return false;
+            result.setResult(false);
+            result.setMessage("이미 신청한 강좌 정보가 존재합니다.");
+
+            return result;
         }
 
 
@@ -185,6 +194,9 @@ public class CourseServiceImpl implements CourseService {
                 .build();
         takeCourseRepository.save(takeCourse);
 
-        return true;
+        result.setResult(true);
+        result.setMessage("");
+
+        return result;
     }
 }

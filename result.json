@@ -1,0 +1,9 @@
+{
+  "header": {
+    "result": true,
+    "message": "이미 신청한 강좌 정보가 존재합니다."
+  },
+  "body": {
+
+  }
+}

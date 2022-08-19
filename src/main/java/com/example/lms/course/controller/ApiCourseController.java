@@ -1,5 +1,7 @@
 package com.example.lms.course.controller;
 
+import com.example.lms.common.model.ResponseResult;
+import com.example.lms.course.model.ServiceResult;
 import com.example.lms.course.model.TakeCourseInput;
 import com.example.lms.course.service.CourseService;
 import lombok.RequiredArgsConstructor;
@@ -24,11 +26,12 @@ public class ApiCourseController extends BaseController {
 
         parameter.setUserId(principal.getName());
 
-        boolean result = courseService.req(parameter);
-        if (!result) {
-            return ResponseEntity.badRequest().body("수강신청에 실패하였습니다.");
+        ServiceResult result = courseService.req(parameter);
+        if (!result.isResult()) {
+            ResponseResult responseResult = new ResponseResult(false, result.getMessage());
+            return ResponseEntity.ok().body(responseResult);
         }
-
-        return ResponseEntity.ok().body(parameter);
+        ResponseResult responseResult = new ResponseResult(true);
+        return ResponseEntity.ok().body(responseResult);
     }
 }

@@ -4,6 +4,7 @@ package com.example.lms.course.service;
 import com.example.lms.course.dto.CourseDto;
 import com.example.lms.course.model.CourseInput;
 import com.example.lms.course.model.CourseParam;
+import com.example.lms.course.model.ServiceResult;
 import com.example.lms.course.model.TakeCourseInput;
 
 import java.util.List;
@@ -49,5 +50,5 @@ public interface CourseService {
     /**
      * 수강신청
      */
-    boolean req(TakeCourseInput parameter);
+    ServiceResult req(TakeCourseInput parameter);
 }
