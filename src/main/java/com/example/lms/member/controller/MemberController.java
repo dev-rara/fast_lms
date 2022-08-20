@@ -1,5 +1,6 @@
 package com.example.lms.member.controller;
 
+import com.example.lms.admin.dto.MemberDto;
 import com.example.lms.member.model.MemberInput;
 import com.example.lms.member.model.ResetPasswordInput;
 import com.example.lms.member.service.MemberService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @RequiredArgsConstructor
 @Controller
@@ -71,7 +73,12 @@ public class MemberController {
     }
 
     @GetMapping("/member/info")
-    public String memberInfo() {
+    public String memberInfo(Model model, Principal principal) {
+
+        String userId = principal.getName();
+        MemberDto detail = memberService.detail(userId);
+
+        model.addAttribute("detail", detail);
 
         return "member/info";
     }
