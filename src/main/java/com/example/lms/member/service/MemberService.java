@@ -2,6 +2,7 @@ package com.example.lms.member.service;
 
 import com.example.lms.admin.dto.MemberDto;
 import com.example.lms.admin.model.MemberParam;
+import com.example.lms.course.model.ServiceResult;
 import com.example.lms.member.model.MemberInput;
 import com.example.lms.member.model.ResetPasswordInput;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -56,4 +57,9 @@ public interface MemberService extends UserDetailsService {
      * 회원 비밀번호 초기화
      */
     boolean updatePassword(String userId, String password);
+
+    /**
+     * 회원 정보 페이지에서 비밀번호 변경
+     */
+    ServiceResult updateMemberPassword(MemberInput parameter);
 }
