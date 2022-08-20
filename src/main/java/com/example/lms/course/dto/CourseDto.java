@@ -27,7 +27,7 @@ public class CourseDto {
     long salePrice;
     LocalDate saleEndDt;
     LocalDateTime regDt;
-    LocalDateTime upDt;
+    LocalDateTime uptDt;
 
     long totalCount;
     long seq;
@@ -46,7 +46,7 @@ public class CourseDto {
                 .salePrice(course.getSalePrice())
                 .saleEndDt(course.getSaleEndDt())
                 .regDt(course.getRegDt())
-                .upDt(course.getUpDt())
+                .uptDt(course.getUptDt())
                 .build();
     }
 

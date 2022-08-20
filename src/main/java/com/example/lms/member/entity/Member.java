@@ -20,6 +20,7 @@ public class Member implements MemberCode {
     private String phone;
     private String password;
     private LocalDateTime regDt;
+    private LocalDateTime udtDt;
 
     private boolean emailAuthYn;
     private LocalDateTime emailAuthDt;

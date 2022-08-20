@@ -32,5 +32,5 @@ public class Course {
     LocalDate saleEndDt;
 
     LocalDateTime regDt;
-    LocalDateTime upDt;
+    LocalDateTime uptDt;
 }

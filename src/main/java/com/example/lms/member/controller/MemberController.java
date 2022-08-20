@@ -84,6 +84,23 @@ public class MemberController {
         return "member/info";
     }
 
+    @PostMapping("/member/info")
+    public String memberInfoSubmit(Model model
+            , MemberInput parameter
+            , Principal principal) {
+
+        String userId = principal.getName();
+        parameter.setUserId(userId);
+
+        ServiceResult result = memberService.updateMember(parameter);
+        if (!result.isResult()) {
+            model.addAttribute("message", result.getMessage());
+            return "common/error";
+        }
+
+        return "redirect:/member/info";
+    }
+
     @GetMapping("/member/reset/password")
     public String resetPassword(Model model, HttpServletRequest request) {
 

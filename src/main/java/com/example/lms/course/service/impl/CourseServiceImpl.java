@@ -83,7 +83,7 @@ public class CourseServiceImpl implements CourseService {
         course.setPrice(parameter.getPrice());
         course.setSalePrice(parameter.getSalePrice());
         course.setSaleEndDt(saleEndDt);
-        course.setUpDt(LocalDateTime.now());
+        course.setUptDt(LocalDateTime.now());
 
         courseRepository.save(course);
 
