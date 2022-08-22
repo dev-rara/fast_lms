@@ -51,6 +51,19 @@
                 </td>
             </tr>
             <tr>
+                <th>주소</th>
+                <td>
+                    <div>
+                        <input type="text" name="zipcode" th:value="${detail.zipcode}" readonly/>
+                        <button type="button">우편번호 찾기</button>
+                    </div>
+                    <div>
+                        <input type="text" name="addr" th:value="${detail.addr}" readonly placeholder="주소 입력"/>
+                        <input type="text" name="addrDetail" th:value="${detail.addrDetail}" readonly placeholder="주소 입력"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
                 <th>가입일</th>
                 <td>
                     <p th:text="${detail.regDtText}"></p>
