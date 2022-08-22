@@ -18,4 +18,10 @@ public interface MemberCode {
      * 현재 가입 요청중
      */
     String MEMBER_STATUS_REQ = "REQ";
+
+
+    /**
+     * 탈퇴한 회원
+     */
+    String MEMBER_STATUS_WITHDRAW = "WITHDRAW";
 }

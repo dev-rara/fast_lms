@@ -7,6 +7,7 @@ import com.example.lms.course.service.TakeCourseService;
 import com.example.lms.member.model.MemberInput;
 import com.example.lms.member.model.ResetPasswordInput;
 import com.example.lms.member.service.MemberService;
+import com.example.lms.util.PasswordUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -168,5 +169,32 @@ public class MemberController {
         model.addAttribute("list", list);
 
         return "member/takecourse";
+    }
+
+    @GetMapping("/member/withdraw")
+    public String memberWithdraw(Model model) {
+
+        return "member/withdraw";
+    }
+
+    @PostMapping("/member/withdraw")
+    public String memberWithdrawSubmit(Model model
+                                        , MemberInput parameter
+                                        , Principal principal) {
+
+        String userId = principal.getName();
+        MemberDto detail = memberService.detail(userId);
+
+        if (PasswordUtils.equals(parameter.getPassword(), detail.getPassword())) {
+            model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
+            return "common/error";
+        }
+        ServiceResult result = memberService.withdraw(userId, parameter.getPassword());
+        if (!result.isResult()) {
+            model.addAttribute("message", result.getMessage());
+            return "common/error";
+        }
+
+        return "redirect:/member/logout";
     }
 }

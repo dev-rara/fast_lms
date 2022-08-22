@@ -12,6 +12,7 @@ import com.example.lms.member.model.MemberInput;
 import com.example.lms.member.model.ResetPasswordInput;
 import com.example.lms.member.repository.MemberRepository;
 import com.example.lms.member.service.MemberService;
+import com.example.lms.util.PasswordUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,6 +22,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import sun.security.util.Password;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -269,15 +271,49 @@ public class MemberServiceImpl implements MemberService {
         }
         Member member = optionalMember.get();
 
-        if (!BCrypt.checkpw(parameter.getPassword(), member.getPassword())) {
+        if (PasswordUtils.equals(parameter.getPassword(), member.getPassword())) {
             return new ServiceResult(false, "비밀번호가 일치하지 않습니다.");
         }
 
-        String encPassword = BCrypt.hashpw(parameter.getNewPassword(), BCrypt.gensalt());
+        String encPassword = PasswordUtils.encPassword(parameter.getNewPassword());
         member.setPassword(encPassword);
         memberRepository.save(member);
 
         return new ServiceResult(true);
+    }
+
+    @Override
+    public ServiceResult withdraw(String userId, String password) {
+
+        Optional<Member> optionalMember = memberRepository.findById(userId);
+        if(!optionalMember.isPresent()) {
+            return new ServiceResult(false, "회원 정보가 존재하지 않습니다.");
+        }
+
+        Member member = optionalMember.get();
+
+        if (!PasswordUtils.equals(password, member.getPassword()) ) {
+            return new ServiceResult(false, "비밀번호가 일치하지 않습니다.");
+        }
+
+
+        member.setUserName("탈퇴 회원");
+        member.setPhone("");
+        member.setPassword("");
+        member.setRegDt(null);
+        member.setUdtDt(null);
+        member.setEmailAuthYn(false);
+        member.setEmailAuthDt(null);
+        member.setEmailAuthKey("");
+        member.setResetPasswordKey("");
+        member.setResetPasswordLimitDt(null);
+        member.setUserStatus(Member.MEMBER_STATUS_WITHDRAW);
+        member.setZipcode("");
+        member.setAddr("");
+        member.setAddrDetail("");
+        memberRepository.save(member);
+
+        return new ServiceResult();
     }
 
     @Override
@@ -295,6 +331,10 @@ public class MemberServiceImpl implements MemberService {
 
         if (Member.MEMBER_STATUS_STOP.equals(member.getUserStatus())) {
             throw new MemberStopUserException("이용이 정지된 회원 입니다.");
+        }
+
+        if (Member.MEMBER_STATUS_WITHDRAW.equals(member.getUserStatus())) {
+            throw new MemberStopUserException("탈퇴한 회원 입니다.");
         }
 
 
