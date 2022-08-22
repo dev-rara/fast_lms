@@ -16,10 +16,9 @@
                   return false;
               }
 
-              var $thisFrom = $(this);
               var url = '/api/course/req.api';
               var parameter = {
-                  courseId: $thisFrom.find('input[name=id]').val()
+                  courseId: id
               };
 
               axios.post(url, parameter).then(function(response){

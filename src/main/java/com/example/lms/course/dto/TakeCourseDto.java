@@ -1,5 +1,6 @@
 package com.example.lms.course.dto;
 
+import com.example.lms.course.entity.TakeCourse;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -30,6 +31,18 @@ public class TakeCourseDto {
 
     long totalCount;
     long seq;
+
+    public static TakeCourseDto of(TakeCourse takeCourseDto) {
+
+        return TakeCourseDto.builder()
+                .id(takeCourseDto.getId())
+                .courseId(takeCourseDto.getCourseId())
+                .userId(takeCourseDto.getUserId())
+                .payPrice(takeCourseDto.getPayPrice())
+                .status(takeCourseDto.getStatus())
+                .regDt(takeCourseDto.getRegDt())
+                .build();
+    }
 
     public String getRegDtText() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
