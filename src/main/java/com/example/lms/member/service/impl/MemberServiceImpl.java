@@ -188,7 +188,7 @@ public class MemberServiceImpl implements MemberService {
            for(MemberDto x: list) {
                x.setTotalCount(totalCount);
                x.setSeq(totalCount - parameter.getPageStart() - i);
-                i++;
+               i++;
            }
         }
         return list;

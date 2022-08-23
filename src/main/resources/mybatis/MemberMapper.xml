@@ -47,4 +47,12 @@
         <include refid="selectListWhere"/>
         limit #{pageStart}, #{pageEnd}
     </select>
+
+
+    <update id="updateLastLoginDt" parameterType="map">
+        update member
+        set
+            last_login_dt = #{lastLoginDt}
+        where user_id = #{userId}
+    </update>
 </mapper>

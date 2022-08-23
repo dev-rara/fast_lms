@@ -13,6 +13,21 @@
             border: solid 1px #000 ;
         }
 
+        .history th {
+            padding: 8px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #696969;
+            color: white;
+        }
+        .history tbody {
+            text-align: center;
+        }
+        .history tr:nth-child(odd){
+            background-color: #f2f2f2;
+        }
+
     </style>
     </head>
     <body>
@@ -93,10 +108,28 @@
                     </tr>
                 </tbody>
             </table>
-
             <div>
-                <a th:href="list.do"> 회원목록</a>
+                <a th:href="list.do">회원 목록</a>
             </div>
+            <br/>
+            <table class="loginHistory">
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>로그인 일자</th>
+                        <th>접속 IP</th>
+                        <th>접속 UserAgent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="x : ${historyList}">
+                        <td th:text="${x.seq}">1</td>
+                        <td th:text="${x.loginDtText}">2022.08.23</td>
+                        <td th:text="${x.userIp}">127.0.0.1</td>
+                        <td th:text="${x.userAgent}">MacOS</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>

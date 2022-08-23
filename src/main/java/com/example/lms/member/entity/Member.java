@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Builder
+@ToString
 public class Member implements MemberCode {
     @Id
     private String userId;
@@ -38,4 +39,6 @@ public class Member implements MemberCode {
     private String zipcode;
     private String addr;
     private String addrDetail;
+
+    private LocalDateTime lastLoginDt;
 }

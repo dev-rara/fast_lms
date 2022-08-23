@@ -1,9 +1,11 @@
 package com.example.lms.admin.controller;
 
 import com.example.lms.admin.dto.MemberDto;
+import com.example.lms.admin.dto.MemberHistoryDto;
 import com.example.lms.admin.model.MemberInput;
 import com.example.lms.admin.model.MemberParam;
 import com.example.lms.course.controller.BaseController;
+import com.example.lms.member.service.MemberHistoryService;
 import com.example.lms.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import java.util.List;
 public class AdminMemberController extends BaseController {
 
     private final MemberService memberService;
+    private final MemberHistoryService memberHistoryService;
 
     @GetMapping("/admin/member/list.do")
     public String list(Model model, MemberParam parameter) {
@@ -45,6 +48,9 @@ public class AdminMemberController extends BaseController {
 
         MemberDto member = memberService.detail(parameter.getUserId());
         model.addAttribute("member", member);
+
+        List<MemberHistoryDto> historyList = memberHistoryService.historyList(parameter);
+        model.addAttribute("historyList", historyList);
 
         return "admin/member/detail";
     }
