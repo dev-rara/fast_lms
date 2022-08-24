@@ -37,10 +37,32 @@
         <h1>LMS Service</h1>
         <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
 
-        <ul class="slider">
-                <li><img th:src="${list.get(0).fileDirectory}"/></li>
-                <li><img th:src="${list.get(1).fileDirectory}"/></li>
-                <li><img th:src="${list.get(2).fileDirectory}"/></li>
-        </ul>
+        <div class="slider">
+                <div>
+                    <a th:if="${list.get(0).openMethod == 0}" th:href="${list.get(0).getUrl()}">
+                        <img th:if="${list.get(0).openMethod == 0}" th:src="${list.get(0).fileDirectory}"/>
+                    </a>
+                    <a th:if="${list.get(0).openMethod != 0}" th:href="${list.get(0).getUrl()}">
+                        <img th:unless="${list.get(0).openMethod == 0}" th:src="${list.get(0).fileDirectory}" th:target="_blank"/>
+                    </a>
+
+                </div>
+                <div>
+                    <a th:if="${list.get(1).openMethod == 0}" th:href="${list.get(1).getUrl()}">
+                        <img th:if="${list.get(2).openMethod == 0}" th:src="${list.get(1).fileDirectory}"/>
+                    </a>
+                    <a th:if="${list.get(1).openMethod != 0}" th:href="${list.get(1).getUrl()}">
+                        <img th:unless="${list.get(2).openMethod == 0}" th:src="${list.get(1).fileDirectory}" th:target="_blank"/>
+                    </a>
+                </div>
+                <div>
+                    <a th:if="${list.get(2).openMethod == 0}" th:href="${list.get(2).getUrl()}">
+                        <img th:if="${list.get(2).openMethod == 0}" th:src="${list.get(2).fileDirectory}"/>
+                    </a>
+                    <a th:if="${list.get(2).openMethod != 0}" th:href="${list.get(2).getUrl()}">
+                        <img th:unless="${list.get(2).openMethod == 0}" th:src="${list.get(2).fileDirectory}" th:target="_blank"/>
+                    </a>
+                </div>
+        </div>
     </body>
 </html>
