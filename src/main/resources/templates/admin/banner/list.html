@@ -111,7 +111,7 @@
                 <p class="total-count">전체
                     <span th:text="${totalCount}"></span>건
                 </p>
-                <a href="/admin/course/add.do">강좌 등록</a>
+                <a href="/admin/banner/add.do">배너 등록</a>
                 <button id="deleteButton" type="button">선택 삭제</button>
             </div>
             <table>
@@ -120,15 +120,10 @@
                         <th>
                             <input id="selectAll" type="checkbox"/>
                         </th>
-                        <th>
-                            NO
-                        </th>
-                        <th>
-                            강좌명
-                        </th>
-                        <th>
-                            등록일
-                        </th>
+                        <th>NO</th>
+                        <th>배너명</th>
+                        <th>이미지</th>
+                        <th>등록일</th>
                     </tr>
                 </thead>
                 <tbody id="dataList">
@@ -139,12 +134,15 @@
                     <td th:text="${x.seq}">1</td>
                     <td>
                         <p>
-                        <a th:href="'edit.do?id=' + ${x.id}"
-                           th:text="${x.subject}">강좌명</a>
+                            <a th:href="'edit.do?id=' + ${x.id}" th:text="${x.bannerName}">배너명</a>
                         </p>
                     </td>
                     <td>
-                        <p th:text="${x.regDt}">2021.01.01</p>
+                        <p th:if="${x.fileDirectory == null}" th:text="${x.alterText}"></p>
+                        <img th:if="${x.fileDirectory != null}" th:src="${x.fileDirectory}" width="100%"/>
+                    </td>
+                    <td>
+                        <p th:text="${x.regDtText}">2022.08.24</p>
                     </td>
                 </tr>
                 </tbody>
@@ -153,7 +151,7 @@
 
             </div>
         </div>
-        <form name ="deleteForm" method="post" action="/admin/course/delete.do">
+        <form name ="deleteForm" method="post" action="/admin/banner/delete.do">
             <input type="hidden" name="idList"/>
         </form>
     </body>
