@@ -3,6 +3,24 @@
 <head>
     <meta charset="UTF-8">
         <title>lsm service</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.slider').bxSlider( {
+                mode: 'horizontal',
+                speed: 500,
+                pager: true,
+                auto: true,
+                pause: 4000,
+                minSlides: 1,
+                maxSlides: 3,
+            });
+        });
+    </script>
+
     <style>
         html,
         body {
@@ -16,8 +34,13 @@
     </style>
     </head>
     <body>
-        <h1>메인 페이지</h1>
-
+        <h1>LMS Service</h1>
         <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
+
+        <ul class="slider">
+                <li><img th:src="${list.get(0).fileDirectory}"/></li>
+                <li><img th:src="${list.get(1).fileDirectory}"/></li>
+                <li><img th:src="${list.get(2).fileDirectory}"/></li>
+        </ul>
     </body>
 </html>

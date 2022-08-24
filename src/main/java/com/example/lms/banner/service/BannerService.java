@@ -21,7 +21,7 @@ public interface BannerService {
     /*
      * 배너 목록
      */
-    List<BannerDto> list(BannerParam bannerParam);
+    List<BannerDto> list(BannerParam parameter);
 
     /*
      * 배너 상세 정보
