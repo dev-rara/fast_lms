@@ -1,11 +1,11 @@
 # lms_service
 수강정보 관리 웹 어플리케이션 프로젝트
+<br>
 
 ### 기술 스택
 * Spring MVC, Spring JPA, Spring Security
 * mybatis, MariaDB
 * thymeleaf, lombok
-<br>
 
 ### 구현 기능
 * 회원가입 및 가입 인증메일 전송
