@@ -1,4 +1,4 @@
-# lms_service
+# LMS Service
 수강정보 관리 웹 어플리케이션 프로젝트
 <br>
 
