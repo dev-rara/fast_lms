@@ -1,7 +1,6 @@
-## lms_service
+# lms_service
 수강정보 관리 웹 어플리케이션 프로젝트
 
------
 ### 기술 스택
 * Spring MVC, Spring JPA, Spring Security
 * mybatis, MariaDB
