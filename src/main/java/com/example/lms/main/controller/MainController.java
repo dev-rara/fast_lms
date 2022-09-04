@@ -18,16 +18,8 @@ public class MainController {
 
     @RequestMapping("/")
     public String index(Model model) {
-        List<BannerDto> bannerList = bannerService.listAll();
-        List<BannerDto> list = new ArrayList<>();
+        model.addAttribute("list", bannerService.listAll());
 
-        for (BannerDto x : bannerList) {
-            if (x.isOpenYn()) {
-                list.add(x);
-            }
-        }
-
-        model.addAttribute("list", list);
         return "index";
     }
 

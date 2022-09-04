@@ -1,4 +1,4 @@
-package com.example.lms.banner.controller;
+package com.example.lms.admin.controller;
 
 import com.example.lms.banner.dto.BannerDto;
 import com.example.lms.banner.model.BannerInput;

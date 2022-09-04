@@ -7,15 +7,12 @@ import com.example.lms.banner.model.BannerInput;
 import com.example.lms.banner.model.BannerParam;
 import com.example.lms.banner.repository.BannerRepository;
 import com.example.lms.banner.service.BannerService;
-import com.example.lms.course.dto.CourseDto;
-import com.example.lms.course.entity.Course;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 @Service
 @RequiredArgsConstructor
@@ -116,9 +113,6 @@ public class BannerServiceImpl implements BannerService {
     @Override
     public List<BannerDto> listAll() {
 
-        List<Banner> bannerList = bannerRepository.findAll();
-
-        return BannerDto.of(bannerList);
+        return bannerMapper.selectAllList();
     }
-
 }
