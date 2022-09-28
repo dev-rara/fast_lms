@@ -3,9 +3,12 @@
 <br>
 
 ### 기술 스택
-* Spring MVC, Spring JPA, Spring Security
-* mybatis, MariaDB
-* thymeleaf, lombok
+* Spring MVC
+* Spring JPA
+* Spring Security
+* mybatis
+* MariaDB
+* thymeleaf
 
 ### 구현 기능
 * 회원가입 및 가입 인증메일 전송
